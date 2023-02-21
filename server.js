@@ -1,17 +1,25 @@
-const mongoose = require("mongoose");
-require("dotenv").config();
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-const { DB_HOST, PORT = 4000 } = process.env;
+const { PORT = 4000 } = process.env;
 
-const app = require("./app");
+const app = require('./app');
 
-mongoose
-  .connect(DB_HOST)
-  .then(() => {
-    app.listen(PORT);
-    console.log(`Server started on PORT = ${PORT}`);
-  })
-  .catch((err) => {
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.DB_HOST);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (err) {
     console.log(err.message);
-    process.exit(1);
+    process.exitCode = 1;
+  }
+};
+
+// Connect to the database before listening
+
+(async () => {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT} for requests`);
   });
+})();
