@@ -11,7 +11,7 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{ "url": "https://slimmomproject.herokuapp.com" }],
+  "servers": [{ "url": "https://slimmom-back-end.cyclic.app" }],
   "tags": [
     {
       "name": "Auth",

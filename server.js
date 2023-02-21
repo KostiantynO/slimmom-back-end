@@ -11,7 +11,7 @@ const connectDB = async () => {
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (err) {
     console.log(err.message);
-    process.exitCode = 1;
+    process.exit(1);
   }
 };
 
@@ -20,6 +20,6 @@ const connectDB = async () => {
 (async () => {
   await connectDB();
   app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT} for requests`);
+    console.log(`Server listens on port ${PORT}`);
   });
 })();

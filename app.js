@@ -25,8 +25,9 @@ app.use('/api/products', productsRouter);
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {
-  res.status(404).json({ message: 'Not found' });
+  res.status(404).json({ message: 'Not found. Please visit /api/docs' });
 });
+
 app.use((err, req, res, next) => {
   const { status = 500 } = err;
   res.status(status).json({ message: err.message });
